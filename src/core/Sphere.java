@@ -6,7 +6,7 @@ import java.awt.*;
 public class Sphere {
     private Point3D point;
     private int R = 0;
-    private int x1, y1;
+    private int x1, y1, z1;
     public static int subFrameWidth=275, subFrameHight=250, xOBegin=10, yOBegin=25, distance=100, labelSize=25, textSize=75;
 
     public Sphere(){
@@ -101,28 +101,36 @@ public class Sphere {
         return frame;
     }
 
-    public JPanel draw() {
-        Graphics2D g = null;
-        double b = point.getY() * Math.sqrt(2.0)/2;
+    public void draw(JPanel panel) {
+        Graphics g = panel.getGraphics();
+        Graphics2D g2D = (Graphics2D) g.create();
 
-        x1 = (int) (-b + Contants.TX);
-        y1 = (int) (b + Contants.TY);
+        double b = point.getX() * Math.sqrt(2.0)/2;
 
-        x1 = x1 + point.getX();
-        y1 = y1 - point.getZ();
+        z1 = (int) (-b + 325);
+        x1 = (int) (b + 550);
+
+        x1 = x1 - point.getY();
+        z1 = z1 + point.getZ();
         R = getR();
 
         Bang2D circle = new Bang2D();
-        //circle.HinhTron(g, x1, y1, R);
+        circle.HinhTron(g2D, x1, z1, R);
 
         Eclip eclip = new Eclip();
         eclip.center.setX(x1);
-        eclip.center.setY(y1);
+        eclip.center.setY(z1);
         eclip.setEclipA(R);
         eclip.setEclipB(R/2);
-        JPanel eclipDraw = eclip.draw();
 
-        return eclipDraw;
+        // draw horizontal eclip
+        eclip.drawEclip(g2D);
+
+        // draw vertical eclip
+        int temp = eclip.getEclipA();
+        eclip.setEclipA(eclip.getEclipB());
+        eclip.setEclipB(temp);
+        eclip.drawEclip(g2D);
     }
 
     public void processTextField(){

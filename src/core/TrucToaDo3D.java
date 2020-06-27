@@ -11,9 +11,9 @@ import java.awt.event.MouseListener;
 public class TrucToaDo3D extends JFrame {
     public enum Choose{Sphere, Cube}
     Choose choose = Choose.Sphere;
+    JPanel panel3D = new JPanel();
 
     public JPanel createPanel3D() {
-        JPanel panel3D = new JPanel();
         panel3D.setLayout(null);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
@@ -163,9 +163,9 @@ public class TrucToaDo3D extends JFrame {
                                 Contants.btnClear.setBackground(Color.WHITE);
 
                                 s.processTextField();
-                                background3D.add(s.draw());
+                                s.draw(panel3D);
                                 background3D.revalidate();
-                                background3D.repaint();
+                                //background3D.repaint();
                             }
                         });
 

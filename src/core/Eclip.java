@@ -88,14 +88,14 @@ public class Eclip {
     }
 
     public JPanel draw() {
-        int x = this.center.getX();
-        int y = this.center.getY();
+        int x_center = this.center.getX();
+        int y_center = this.center.getY();
 
-        int width = (int) getwidth();
-        int height = (int) getheight();
+//        int width = (int) getwidth();
+//        int height = (int) getheight();
 
-        int xPanel = x - width;
-        int yPanel = y - height;
+//        int xPanel = x - width;
+//        int yPanel = y - height;
 
         JPanel panelDraw = new JPanel() {
             private static final long serialVersionUID = 1L;
@@ -104,65 +104,102 @@ public class Eclip {
             protected void paintComponent(Graphics g) {
                 // TODO Auto-generated method stub
                 super.paintComponent(g);
-                int x, y, fx, fy, a2, b2, p;
-                x = 0;
-                y = height;
-                a2 = width*width;
-                b2 = height*height;
-                fx = 0;
-                fy = 2 * a2 * y;
-                g.drawOval(x+width, height-y, 1, 1);
-                g.drawOval(-x+width, height-y, 1, 1);
-                g.drawOval(x+width, height-(-y), 1, 1);
-                g.drawOval(-x+width, height-(-y), 1, 1);
-                p = (int) Math.round(b2-a2*height+0.25*a2);//p=b2 - a2*b +a2/4
-                while(fx<fy)
-                {
-                    x++;
-                    fx += 2*b2;
-                    if(p<0)
-                    {
-                        p += b2*(2*x + 3);//p=p + b2*(2x +3)
-                    }
-                    else
-                    {
+                Graphics2D g2d = (Graphics2D) g;
+
+                float p, a2, b2;
+                int x = 0, y = eclipB;
+
+                a2 = eclipA*eclipA;
+                b2 = eclipB*eclipB;
+
+//                p = (int) Math.round(b2-a2*height+0.25*a2);//p=b2 - a2*b +a2/4
+                p = 2 * ((float) b2/a2) - (2*eclipB) + 1;
+                while(((float) b2/a2) * x <= y) {
+                    put4Pixel(g2d, x_center, y_center, x, y);
+                    if(p < 0) {
+                        p = p+2 * ((float) b2/a2) * (2*x + 3);
+                    } else {
+                        p = p - 4*y + 2*((float) b2/a2) * (2*x + 3);
                         y--;
-                        p += b2*(2*x +3) + a2*(2- 2*y);//p=p +b2(2x +3) +a2(2-2y)
-                        fy -= 2*a2;
                     }
-                    g.drawOval(x+width, height-y, 1, 1);
-                    g.drawOval(-x+width, height-y, 1, 1);
-                    g.drawOval(x+width, height-(-y), 1, 1);
-                    g.drawOval(-x+width, height-(-y), 1, 1);
+                    x++;
                 }
                 p = (int) Math.round(b2 * (x + 0.5) * (x + 0.5) + a2 * (y - 1) * (y - 1) - a2 * b2);
                 //
-                while(y > 0)
-                {
-                    y--;
-                    fy -= 2*a2;
+                y=0;
+                if(eclipB > eclipA && eclipB/eclipA > 4) x = eclipA + 4;
+                else if(eclipA > eclipB && eclipA/eclipB > 4) x = eclipA + 4;
+                else x = eclipA;
 
-                    if(p >= 0)
+                p = 2 * ((float) a2/b2) - 2*eclipA + 1;
+                while(((float)a2/b2)*y<=x)
+                {
+                    put4Pixel(g2d, x_center, y_center, x, y);
+                    if(p < 0) {
+                        p = p + 2*((float) a2/b2) * (2*y + 3);
+                    } else
                     {
-                        p += a2 * (3 - 2*y); //p=p +a2(3-2y)
+                        p = p- 4*x + 2*((float) a2/b2) * (2*y + 3);
+                        x = x - 1;
                     }
-                    else
-                    {
-                        x++;
-                        fx += 2 * b2;
-                        p += b2*(2*x +2) +a2*(3- 2*y);//p=p+ b2(2x +2) + a2(3-2y)
-                    }
-                    g.drawOval(x+width, height-y, 1, 1);
-                    g.drawOval(-x+width, height-y, 1, 1);
-                    g.drawOval(x+width, height-(-y), 1, 1);
-                    g.drawOval(-x+width, height-(-y), 1, 1);
+                    y = y + 1;
                 }
             }
 
         };
         panelDraw.setOpaque(false);
 
-        panelDraw.setBounds(xPanel, yPanel, width*2+1,height*2+1);
+//        panelDraw.setBounds(xPanel, yPanel, width*2+1,height*2+1);
         return panelDraw;
+    }
+
+    public void drawEclip(Graphics2D g2d) {
+        int x_center = this.center.getX();
+        int y_center = this.center.getY();
+
+        float p, a2, b2;
+        int x = 0, y = eclipB;
+
+        a2 = eclipA*eclipA;
+        b2 = eclipB*eclipB;
+
+        p = 2 * ((float) b2/a2) - (2*eclipB) + 1;
+        while(((float) b2/a2) * x <= y) {
+            put4Pixel(g2d, x_center, y_center, x, y);
+            if(p < 0) {
+                p = p+2 * ((float) b2/a2) * (2*x + 3);
+            } else {
+                p = p - 4*y + 2*((float) b2/a2) * (2*x + 3);
+                y--;
+            }
+            x++;
+        }
+        p = (int) Math.round(b2 * (x + 0.5) * (x + 0.5) + a2 * (y - 1) * (y - 1) - a2 * b2);
+        //
+        y=0;
+        if(eclipB > eclipA && eclipB/eclipA > 4) x = eclipA + 4;
+        else if(eclipA > eclipB && eclipA/eclipB > 4) x = eclipA + 4;
+        else x = eclipA;
+
+        p = 2 * ((float) a2/b2) - (2*eclipA) + 1;
+        while(((float)a2/b2)*y<=x)
+        {
+            put4Pixel(g2d, x_center, y_center, x, y);
+            if(p < 0) {
+                p = p + 2*((float) a2/b2) * (2*y + 3);
+            } else
+            {
+                p = p- 4*x + 2*((float) a2/b2) * (2*y + 3);
+                x = x - 1;
+            }
+            y = y + 1;
+        }
+    }
+
+    public void put4Pixel(Graphics2D g, int xc, int yc, int x, int y) {
+        g.drawOval(xc + x, yc + y, 1, 1);
+        g.drawOval(xc - x, yc + y, 1, 1);
+        g.drawOval(xc - x, yc - y, 1, 1);
+        g.drawOval(xc + x, yc - y, 1, 1);
     }
 }
