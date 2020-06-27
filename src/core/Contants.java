@@ -15,7 +15,7 @@ public class Contants {
     public static double TX = 550;
     public static double TY = 600;
 
-    public static JTextField tfX1, tfX2, tfX3, tfY1, tfY2, tfY3, tfZ1, tfH, tfWidth, tfHeight, tfRadius;
+    public static JTextField tfX1, tfX2, tfX3, tfY1, tfY2, tfY3, tfZ1, tfH,tfLength, tfWidth, tfHeight, tfRadius;
     public static JButton btnDraw, btnClear;
 
     /*

@@ -184,7 +184,39 @@ public class TrucToaDo3D extends JFrame {
                         });
                         break;
                     case Cube:
+                        Cube c = new Cube();
+                        c.createToaDo3D();
 
+                        Contants.btnDraw.addActionListener(new ActionListener() {
+
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                // TODO Auto-generated method stub
+
+
+                                Contants.btnDraw.setBackground(Color.GRAY);
+                                Contants.btnClear.setBackground(Color.WHITE);
+
+                                c.processTextField();
+                                c.draw(panel3D);
+                                background3D.revalidate();
+                                //background3D.repaint();
+                            }
+                        });
+
+
+                        Contants.btnClear.addActionListener(new ActionListener() {
+
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                // TODO Auto-generated method stub
+
+                                Contants.btnDraw.setBackground(Color.WHITE);
+                                Contants.btnClear.setBackground(Color.GRAY);
+
+                                c.clear();
+                            }
+                        });
                         break;
                 }
             }
