@@ -3,7 +3,7 @@ package core;
 import javax.swing.*;
 import java.awt.*;
 
-public class Sphere {
+public class Sphere extends JPanel {
     private Point3D point;
     private int R = 0;
     private int x1, y1, z1;
@@ -101,6 +101,11 @@ public class Sphere {
         return frame;
     }
 
+//    @Override
+//    public void paint(Graphics g) {
+//        super.paint(g);
+//    }
+
     public void draw(JPanel panel) {
         Graphics g = panel.getGraphics();
         Graphics2D g2D = (Graphics2D) g.create();
@@ -136,34 +141,32 @@ public class Sphere {
     public void processTextField(){
         String text = Contants.tfX1.getText();
 
-        if(text.equals("")){
-            Contants.tfX1.requestFocus(); // nhay den de nhap tien gui
+        if (text.equals("")){
+            Contants.tfX1.requestFocus();
         } else {
-            point.setX(Integer.parseInt(text));
+            point.setX(Integer.parseInt(text) * 5);
 
-            text=Contants.tfY1.getText();
+            text = Contants.tfY1.getText();
             if(text.equals("")){
-                Contants.tfY1.requestFocus(); // nhay den de nhap tien gui
+                Contants.tfY1.requestFocus();
             } else {
-                point.setY(Math.abs(Integer.parseInt(text)));
+                point.setY(Math.abs(Integer.parseInt(text)) * 5);
 
-                text=Contants.tfZ1.getText();
-                if(text.equals("")){
+                text = Contants.tfZ1.getText();
+                if (text.equals("")){
                     Contants.tfZ1.requestFocus();
-                }
-                else{
-                    point.setZ((int) Math.abs(Integer.parseInt(text)));
+                } else {
+                    point.setZ((int) Math.abs(Integer.parseInt(text)) * 5);
 
-                    text=Contants.tfRadius.getText();
-                    if(text.equals("")){
-                        Contants.tfRadius.requestFocus(); // nhay den de nhap tien gui
+                    text = Contants.tfRadius.getText();
+                    if (text.equals("")){
+                        Contants.tfRadius.requestFocus();
                     } else {
-                        setR(Integer.parseInt(text));
+                        setR(Integer.parseInt(text) * 5);
                     }
                 }
             }
         }
-
     }
 
     public void clear(){
