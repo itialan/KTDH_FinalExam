@@ -164,7 +164,7 @@ public class Eclip {
         b2 = eclipB*eclipB;
 
         p = 2 * ((float) b2/a2) - (2*eclipB) + 1;
-        while(((float) b2/a2) * x <= y) {
+        while(((float) b2/a2)*x <= y) {
             put4Pixel(g2d, x_center, y_center, x, y);
             if(p < 0) {
                 p = p+2 * ((float) b2/a2) * (2*x + 3);
@@ -182,7 +182,7 @@ public class Eclip {
         else x = eclipA;
 
         p = 2 * ((float) a2/b2) - (2*eclipA) + 1;
-        while(((float)a2/b2)*y<=x)
+        while(((float) a2/b2)*y <= x)
         {
             put4Pixel(g2d, x_center, y_center, x, y);
             if(p < 0) {

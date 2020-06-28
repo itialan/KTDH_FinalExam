@@ -75,19 +75,25 @@ public class TrucToaDo3D extends JFrame {
             protected void paintComponent(Graphics arg0) {
                 // TODO Auto-generated method stub
                 super.paintComponent(arg0);
+
+                // Y
                 arg0.drawLine(Contants.backgroundWidth/2 - 50, 0, core.Contants.backgroundWidth/2 - 50, core.Contants.backgroundHeight/2);
                 for(int i = core.Contants.backgroundHeight/2; i<= core.Contants.backgroundHeight; i+=6){
                     arg0.drawLine(core.Contants.backgroundWidth/2 - 50, i, core.Contants.backgroundWidth/2 - 50,i+3);
                 }
+
+                // X
                 arg0.drawLine(core.Contants.backgroundWidth/2 - 50, core.Contants.backgroundHeight/2, core.Contants.backgroundWidth, core.Contants.backgroundHeight/2);
                 for(int i = core.Contants.backgroundWidth/2; i>=0; i-=6){
                     arg0.drawLine(i, core.Contants.backgroundHeight/2,i - 3, core.Contants.backgroundHeight/2);
                 }
-                arg0.drawLine(0, core.Contants.backgroundHeight + 100, core.Contants.backgroundWidth/2 - 50, core.Contants.backgroundHeight/2);
-                int l= core.Contants.backgroundHeight/2;
-                for(int i = core.Contants.backgroundWidth/2; i< core.Contants.backgroundWidth; i+=6){
-                    arg0.drawLine(i - 50, l, i - 47,(int) ((int) l-2.75));
-                    l-=5;
+
+                // Z
+                arg0.drawLine(0, core.Contants.backgroundHeight + 175, core.Contants.backgroundWidth/2 - 50, core.Contants.backgroundHeight/2);
+                int l = core.Contants.backgroundHeight/2;
+                for(int i = core.Contants.backgroundWidth/2; i < core.Contants.backgroundWidth; i+=5){
+                    arg0.drawLine(i - 50, l, i - 47,(int) ((int) l-3));
+                    l -= 5;
                 }
             }
         };
@@ -95,39 +101,39 @@ public class TrucToaDo3D extends JFrame {
         JLabel labelX,labelY,labelZ,labelO,labelMaxX,labelMinX,labelMaxY,labelMinY,labelMaxZ,labelMinZ;
 
         labelY=new JLabel("Y");
-        labelY.setBounds(core.Contants.backgroundWidth/2 - 35, 10,10 , 10);
+        labelY.setBounds(core.Contants.backgroundWidth/2 - 70, 10,10 , 10);
         background3D.add(labelY);
 
-        labelMaxY=new JLabel("300");
-        labelMaxY.setBounds(core.Contants.backgroundWidth/2 - 10, 10,30 , 10);
+        labelMaxY=new JLabel("325");
+        labelMaxY.setBounds(core.Contants.backgroundWidth/2 - 40, 10,30 , 10);
         background3D.add(labelMaxY);
 
-        labelMinY=new JLabel("-300");
-        labelMinY.setBounds(core.Contants.backgroundWidth/2 - 30, core.Contants.backgroundHeight-15, 30, 10);
+        labelMinY=new JLabel("-325");
+        labelMinY.setBounds(core.Contants.backgroundWidth/2 - 40, core.Contants.backgroundHeight-15, 30, 10);
         background3D.add(labelMinY);
 
         labelX=new JLabel("X");
-        labelX.setBounds(core.Contants.backgroundWidth-15, core.Contants.backgroundHeight/2-15,10 , 10);
+        labelX.setBounds(core.Contants.backgroundWidth - 15, core.Contants.backgroundHeight/2-15,10 , 10);
         background3D.add(labelX);
 
-        labelMaxX=new JLabel("375");
+        labelMaxX=new JLabel("500");
         labelMaxX.setBounds(core.Contants.backgroundWidth-30, core.Contants.backgroundHeight/2+15,30 , 10);
         background3D.add(labelMaxX);
 
-        labelMinX=new JLabel("-375");
+        labelMinX=new JLabel("-500");
         labelMinX.setBounds(15, core.Contants.backgroundHeight / 2+15, 30, 10);
         background3D.add(labelMinX);
 
         labelZ=new JLabel("Z");
-        labelZ.setBounds(115, core.Contants.backgroundHeight - 15,10 , 10);
+        labelZ.setBounds(160, core.Contants.backgroundHeight - 15,10 , 10);
         background3D.add(labelZ);
 
-        labelMaxZ=new JLabel("480");
-        labelMaxZ.setBounds(165, core.Contants.backgroundHeight - 15,30 , 10);
+        labelMaxZ=new JLabel("460");
+        labelMaxZ.setBounds(195, core.Contants.backgroundHeight - 15,30 , 10);
         background3D.add(labelMaxZ);
 
-        labelMinZ=new JLabel("-480");
-        labelMinZ.setBounds(core.Contants.backgroundWidth/2 + 335, 10, 30, 10);
+        labelMinZ=new JLabel("-460");
+        labelMinZ.setBounds(core.Contants.backgroundWidth/2 + 290, 10, 30, 10);
         background3D.add(labelMinZ);
 
         labelO=new JLabel("0");
@@ -135,7 +141,7 @@ public class TrucToaDo3D extends JFrame {
         background3D.add(labelO);
 
 
-        background3D.setPreferredSize( new Dimension( 750, 600 ) );
+        background3D.setPreferredSize(new Dimension( 750, 600 ));
         Border blueBoder;
         blueBoder=BorderFactory.createLineBorder(Color.BLUE);
         background3D.setBorder(blueBoder);

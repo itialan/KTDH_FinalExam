@@ -110,13 +110,13 @@ public class Sphere extends JPanel {
         Graphics g = panel.getGraphics();
         Graphics2D g2D = (Graphics2D) g.create();
 
-        double b = point.getX() * Math.sqrt(2.0)/2;
+        double b = point.getZ() * Math.sqrt(2.0)/2;
 
-        z1 = (int) (-b + 325);
-        x1 = (int) (b + 550);
+        x1 = (int) (-b + Contants.X_DEVIATION);
+        z1 = (int) (b + Contants.Y_DEVIATION + Contants.PANEL_DEVIATION);
 
-        x1 = x1 - point.getY();
-        z1 = z1 + point.getZ();
+        x1 = x1 + point.getX();
+        z1 = z1 - point.getY();
         R = getR();
 
         Bang2D circle = new Bang2D();
@@ -141,22 +141,22 @@ public class Sphere extends JPanel {
     public void processTextField(){
         String text = Contants.tfX1.getText();
 
-        if (text.equals("")){
+        if (text.equals("")) {
             Contants.tfX1.requestFocus();
         } else {
             point.setX(Integer.parseInt(text) * 5);
 
             text = Contants.tfY1.getText();
-            if(text.equals("")){
+            if(text.equals("")) {
                 Contants.tfY1.requestFocus();
             } else {
-                point.setY(Math.abs(Integer.parseInt(text)) * 5);
+                point.setY(Integer.parseInt(text) * 5);
 
                 text = Contants.tfZ1.getText();
                 if (text.equals("")){
                     Contants.tfZ1.requestFocus();
                 } else {
-                    point.setZ((int) Math.abs(Integer.parseInt(text)) * 5);
+                    point.setZ(Integer.parseInt(text) * 5);
 
                     text = Contants.tfRadius.getText();
                     if (text.equals("")){

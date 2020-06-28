@@ -5,7 +5,7 @@ import javax.swing.*;
 public class Contants {
     public static int WIDTH = 900;
     public static int HEIGHT = 750;
-    public static int backgroundWidth = 1200;
+    public static int backgroundWidth = 1100;
     public static int backgroundHeight = 650;
     public static int xIcon = 0;
     public static int yIcon = 0;
@@ -18,10 +18,11 @@ public class Contants {
     public static JTextField tfX1, tfX2, tfX3, tfY1, tfY2, tfY3, tfZ1, tfH,tfLength, tfWidth, tfHeight, tfRadius;
     public static JButton btnDraw, btnClear;
 
-    /*
-     * dolechX,Y,Z dung de quy doi giua gia tri user nhap va toa do man hinh
-     */
-    public final static int doLechX = 375;
-    public final static int doLechY = 300;
-    public final static int doLechZ = 480;
+
+    // This deviation is calculated from the coordinates 0 of the Panel (not the coordinates 0 of the console screen)
+    public final static int X_DEVIATION = 500;
+    public final static int Y_DEVIATION = 325;
+
+    // the deviation of the console
+    public final static int PANEL_DEVIATION = 50;
 }

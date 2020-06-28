@@ -131,52 +131,53 @@ public class Cube {
     public void draw(JPanel panel) {
         Graphics g = panel.getGraphics();
         Graphics2D g2D = (Graphics2D) g.create();
+        g2D.drawOval(120, 50, 1,  1);
 
         int a = (int) (getWidth() * Math.sqrt(2.0)/2);
-        int b = (int) (getX() * Math.sqrt(2.0)/2);
+        int b = (int) (getZ() * Math.sqrt(2.0)/2);
         int x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4, x5, y5, z5, x6, y6, z6, x7, y7, z7,  x8, y8, z8;
 
-        x1 = b + 550;
-        z1 = -b + 325;
+        x1 = -b + Contants.X_DEVIATION;
+        z1 = b + Contants.Y_DEVIATION + Contants.PANEL_DEVIATION;
 
-        z1 = z1 + getX();
-        x1 = x1 - getZ();
+        x1 = x1 + getX();
+        z1 = z1 - getY();
 
-        z2 = z1 + getLength();
-        x2 = x1;
+        x2 = x1 + getLength();
+        z2 = z1;
 
-        z3 = z2;
-        x3 = x2 - getHeight();
+        x3 = x2;
+        z3 = z2 - getHeight();
 
-        z4 = z1;
-        x4 = x1 - getHeight();
+        x4 = x1;
+        z4 = z1 - getHeight();
 
-        z5 = z1 - a;
-        x5 = x1 + a;
+        x5 = x1 - a;
+        z5 = z1 + a;
 
-        z6 = z5 + getLength();
-        x6 = x5;
+        x6 = x5 + getLength();
+        z6 = z5;
 
-        z7 = z6;
-        x7 = x6 - getHeight();
+        x7 = x6;
+        z7 = z6 - getHeight();
 
-        z8 = z5;
-        x8 = x5 - getHeight();
+        x8 = x5;
+        z8 = z5 - getHeight();
 
-        midPointLine(g2D, z1, x1, z2, x2, true);
-        midPointLine(g2D, z2, x2, z3, x3, false);
-        midPointLine(g2D, z3, x3, z4, x4, false);
-        midPointLine(g2D, z4, x4, z1, x1, true);
+        midPointLine(g2D, x1, z1, x2, z2, true);
+        midPointLine(g2D, x2, z2, x3, z3, false);
+        midPointLine(g2D, x3, z3, x4, z4, false);
+        midPointLine(g2D, x4, z4, x1, z1, true);
 
-        midPointLine(g2D, z3, x3, z7, x7, false);
-        midPointLine(g2D, z4, x4, z8, x8, false);
-        midPointLine(g2D, z2, x2, z6, x6, false);
-        midPointLine(g2D, z1, x1, z5, x5, true);
+        midPointLine(g2D, x3, z3, x7, z7, false);
+        midPointLine(g2D, x4, z4, x8, z8, false);
+        midPointLine(g2D, x2, z2, x6, z6, false);
+        midPointLine(g2D, x1, z1, x5, z5, true);
 
-        midPointLine(g2D, z8, x8, z7, x7, false);
-        midPointLine(g2D, z7, x7, z6, x6, false);
-        midPointLine(g2D, z6, x6, z5, x5, false);
-        midPointLine(g2D, z5, x5, z8, x8, false);
+        midPointLine(g2D, x8, z8, x7, z7, false);
+        midPointLine(g2D, x7, z7, x6, z6, false);
+        midPointLine(g2D, x6, z6, x5, z5, false);
+        midPointLine(g2D, x5, z5, x8, z8, false);
     }
 
     public void midPointLine(Graphics2D g, int x1, int y1, int x2, int y2, boolean dashed) {
@@ -253,12 +254,12 @@ public class Cube {
             if (text.equals("")){
                 Contants.tfY1.requestFocus();
             } else {
-                setY(Math.abs(Integer.parseInt(text)) * 5);
+                setY(Integer.parseInt(text) * 5);
                 text = Contants.tfZ1.getText();
                 if (text.equals("")){
                     Contants.tfZ1.requestFocus();
                 } else {
-                    setZ(Math.abs(Integer.parseInt(text)) * 5);
+                    setZ(Integer.parseInt(text) * 5);
                     text = Contants.tfLength.getText();
                     if (text.equals("")){
                         Contants.tfLength.requestFocus();
