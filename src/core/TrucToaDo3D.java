@@ -22,28 +22,28 @@ public class TrucToaDo3D extends JFrame {
         JButton sphere, cube;
         ImageIcon iconSphere, iconCube;
 
-        iconSphere=new ImageIcon("./resources/image/sphere.png");
+        iconSphere = new ImageIcon("./src/resources/image/sphere.png");
         sphere = new JButton(iconSphere);
         sphere.setFocusPainted(false);
-        sphere.setBackground(Color.white);
+        sphere.setBackground(Color.WHITE);
         sphere.setContentAreaFilled(false);
         sphere.setOpaque(true);
-        sphere.setBounds(0, 0, 50, 30);
+        sphere.setBounds(10, 10, 50, 30);
 
-        iconCube = new ImageIcon("./resources/image/cube.png");
+        iconCube = new ImageIcon("./src/resources/image/cube.png");
         cube = new JButton(iconCube);
         cube.setFocusPainted(false);
-        cube.setBackground(Color.white);
+        cube.setBackground(Color.WHITE);
         cube.setContentAreaFilled(false);
         cube.setOpaque(true);
-        cube.setBounds(50, 0, 50, 30);
+        cube.setBounds(70, 10, 50, 30);
 
         sphere.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 // TODO Auto-generated method stub
                 choose = Choose.Sphere;
-                sphere.setBackground(Color.BLACK);
+                sphere.setBackground(Color.ORANGE);
                 cube.setBackground(Color.WHITE);
             }
         });
@@ -54,7 +54,7 @@ public class TrucToaDo3D extends JFrame {
                 // TODO Auto-generated method stub
                 choose = Choose.Cube;
                 sphere.setBackground(Color.WHITE);
-                cube.setBackground(Color.BLACK);
+                cube.setBackground(Color.ORANGE);
             }
         });
 
@@ -170,8 +170,6 @@ public class TrucToaDo3D extends JFrame {
 
                                 s.processTextField();
                                 s.draw(panel3D);
-                                background3D.revalidate();
-                                //background3D.repaint();
                             }
                         });
 
@@ -186,6 +184,8 @@ public class TrucToaDo3D extends JFrame {
                                 Contants.btnClear.setBackground(Color.GRAY);
 
                                 s.clear();
+                                background3D.revalidate();
+                                background3D.repaint();
                             }
                         });
                         break;
@@ -199,14 +199,11 @@ public class TrucToaDo3D extends JFrame {
                             public void actionPerformed(ActionEvent e) {
                                 // TODO Auto-generated method stub
 
-
                                 Contants.btnDraw.setBackground(Color.GRAY);
                                 Contants.btnClear.setBackground(Color.WHITE);
 
                                 c.processTextField();
                                 c.draw(panel3D);
-                                background3D.revalidate();
-                                //background3D.repaint();
                             }
                         });
 
@@ -221,6 +218,8 @@ public class TrucToaDo3D extends JFrame {
                                 Contants.btnClear.setBackground(Color.GRAY);
 
                                 c.clear();
+                                background3D.revalidate();
+                                background3D.repaint();
                             }
                         });
                         break;
