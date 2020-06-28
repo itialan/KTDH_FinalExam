@@ -187,9 +187,181 @@ public class Eclip {
             put4Pixel(g2d, x_center, y_center, x, y);
             if(p < 0) {
                 p = p + 2*((float) a2/b2) * (2*y + 3);
-            } else
-            {
-                p = p- 4*x + 2*((float) a2/b2) * (2*y + 3);
+            } else {
+                p = p - 4*x + 2*((float) a2/b2) * (2*y + 3);
+                x = x - 1;
+            }
+            y = y + 1;
+        }
+    }
+
+    public void drawSolidEclip(Graphics2D g2d) {
+        int x_center = this.center.getX();
+        int y_center = this.center.getY();
+
+        float p, a2, b2;
+        int x = 0, y = eclipB;
+
+        a2 = eclipA*eclipA;
+        b2 = eclipB*eclipB;
+
+        p = 2 * ((float) b2/a2) - (2*eclipB) + 1;
+        while(((float) b2/a2)*x <= y) {
+            drawTop(g2d, x_center, y_center, x, y);
+            if (p < 0) {
+                p = p+2 * ((float) b2/a2) * (2*x + 3);
+            } else {
+                p = p - 4*y + 2*((float) b2/a2) * (2*x + 3);
+                y--;
+            }
+            x++;
+        }
+
+        y = 0; x = eclipA;
+        p = 2 * ((float) a2/b2) - (2*eclipA) + 1;
+        while(((float) a2/b2)*y <= x)
+        {
+            drawTop(g2d, x_center, y_center, x, y);
+            if (p < 0) {
+                p = p + 2*((float) a2/b2) * (2*y + 3);
+            } else {
+                p = p - 4*x + 2*((float) a2/b2) * (2*y + 3);
+                x = x - 1;
+            }
+            y = y + 1;
+        }
+    }
+
+    public void drawDashedEclip(Graphics2D g2d) {
+        int x_center = this.center.getX();
+        int y_center = this.center.getY();
+
+        float p, a2, b2;
+        int x = 0, y = eclipB, count = 0;
+
+        a2 = eclipA*eclipA;
+        b2 = eclipB*eclipB;
+
+        p = 2 * ((float) b2/a2) - (2*eclipB) + 1;
+        while(((float) b2/a2)*x <= y) {
+            if (p < 0) {
+                p = p+2 * ((float) b2/a2) * (2*x + 3);
+            } else {
+                p = p - 4*y + 2*((float) b2/a2) * (2*x + 3);
+                y--;
+            }
+            if (x % 10 == 0) {
+                count = 0;
+            }
+            if (count < 5) {
+                drawBottom(g2d, x_center, y_center, x, y);
+                count++;
+            }
+            x++;
+        }
+
+        y = 0; x = eclipA;
+        p = 2 * ((float) a2/b2) - (2*eclipA) + 1;
+        while(((float) a2/b2)*y <= x)
+        {
+            if (p < 0) {
+                p = p + 2*((float) a2/b2) * (2*y + 3);
+            } else {
+                p = p - 4*x + 2*((float) a2/b2) * (2*y + 3);
+                x = x - 1;
+            }
+            if (y % 10 == 0) {
+                count = 0;
+            }
+            if (count < 5) {
+                drawBottom(g2d, x_center, y_center, x, y);
+                count++;
+            }
+            y = y + 1;
+        }
+    }
+
+    // backside
+    public void drawDashedEclip2(Graphics2D g2d) {
+        int x_center = this.center.getX();
+        int y_center = this.center.getY();
+
+        float p, a2, b2;
+        int x = 0, y = eclipB, count = 0;
+
+        a2 = eclipA*eclipA;
+        b2 = eclipB*eclipB;
+
+        p = 2 * ((float) b2/a2) - (2*eclipB) + 1;
+        while(((float) b2/a2)*x <= y) {
+            if (p < 0) {
+                p = p+2 * ((float) b2/a2) * (2*x + 3);
+            } else {
+                p = p - 4*y + 2*((float) b2/a2) * (2*x + 3);
+                y--;
+            }
+            if (x % 10 == 0) {
+                count = 0;
+            }
+            if (count < 5) {
+                drawBackside(g2d, x_center, y_center, x, y);
+                count++;
+            }
+            x++;
+        }
+
+        y = 0; x = eclipA;
+        p = 2 * ((float) a2/b2) - (2*eclipA) + 1;
+        while(((float) a2/b2)*y <= x)
+        {
+            if (p < 0) {
+                p = p + 2*((float) a2/b2) * (2*y + 3);
+            } else {
+                p = p - 4*x + 2*((float) a2/b2) * (2*y + 3);
+                x = x - 1;
+            }
+            if (y % 10 == 0) {
+                count = 0;
+            }
+            if (count < 5) {
+                drawBackside(g2d, x_center, y_center, x, y);
+                count++;
+            }
+            y = y + 1;
+        }
+    }
+
+    public void drawSolidEclip2(Graphics2D g2d) {
+        int x_center = this.center.getX();
+        int y_center = this.center.getY();
+
+        float p, a2, b2;
+        int x = 0, y = eclipB;
+
+        a2 = eclipA*eclipA;
+        b2 = eclipB*eclipB;
+
+        p = 2 * ((float) b2/a2) - (2*eclipB) + 1;
+        while(((float) b2/a2)*x <= y) {
+            drawFront(g2d, x_center, y_center, x, y);
+            if (p < 0) {
+                p = p+2 * ((float) b2/a2) * (2*x + 3);
+            } else {
+                p = p - 4*y + 2*((float) b2/a2) * (2*x + 3);
+                y--;
+            }
+            x++;
+        }
+
+        y = 0; x = eclipA;
+        p = 2 * ((float) a2/b2) - (2*eclipA) + 1;
+        while(((float) a2/b2)*y <= x)
+        {
+            drawFront(g2d, x_center, y_center, x, y);
+            if (p < 0) {
+                p = p + 2*((float) a2/b2) * (2*y + 3);
+            } else {
+                p = p - 4*x + 2*((float) a2/b2) * (2*y + 3);
                 x = x - 1;
             }
             y = y + 1;
@@ -201,5 +373,25 @@ public class Eclip {
         g.drawOval(xc - x, yc + y, 1, 1);
         g.drawOval(xc - x, yc - y, 1, 1);
         g.drawOval(xc + x, yc - y, 1, 1);
+    }
+
+    public void drawBottom(Graphics2D g, int xc, int yc, int x, int y) {
+        g.drawOval(xc - x, yc - y, 1, 1);
+        g.drawOval(xc + x, yc - y, 1, 1);
+    }
+
+    public void drawTop(Graphics2D g, int xc, int yc, int x, int y) {
+        g.drawOval(xc + x, yc + y, 1, 1);
+        g.drawOval(xc - x, yc + y, 1, 1);
+    }
+
+    public void drawBackside(Graphics2D g, int xc, int yc, int x, int y) {
+        g.drawOval(xc + x, yc + y, 1, 1);
+        g.drawOval(xc + x, yc - y, 1, 1);
+    }
+
+    public void drawFront(Graphics2D g, int xc, int yc, int x, int y) {
+        g.drawOval(xc - x, yc + y, 1, 1);
+        g.drawOval(xc - x, yc - y, 1, 1);
     }
 }

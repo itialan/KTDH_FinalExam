@@ -129,13 +129,15 @@ public class Sphere extends JPanel {
         eclip.setEclipB(R/2);
 
         // draw horizontal eclip
-        eclip.drawEclip(g2D);
+        eclip.drawDashedEclip(g2D);
+        eclip.drawSolidEclip(g2D);
 
         // draw vertical eclip
         int temp = eclip.getEclipA();
         eclip.setEclipA(eclip.getEclipB());
         eclip.setEclipB(temp);
-        eclip.drawEclip(g2D);
+        eclip.drawDashedEclip2(g2D);
+        eclip.drawSolidEclip2(g2D);
     }
 
     public void processTextField(){
