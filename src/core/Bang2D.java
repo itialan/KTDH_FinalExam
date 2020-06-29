@@ -1,8 +1,10 @@
 package core;
 
 import java.awt.BasicStroke;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -13,9 +15,13 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.Random;
 import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
 
 public class Bang2D extends JFrame {
 
+    /**
+     *
+     */
     private static final long serialVersionUID = 1L;
     private JPanel MainPanel;
 
@@ -63,42 +69,14 @@ public class Bang2D extends JFrame {
             g2d.drawOval(x, y, 1, 1);
         }
     }
-    void BresenhamLine(Graphics g, int x1, int y1, int x2, int y2)
-    {
-
-        int Dx = x2 - x1;
-        int Dy = y2 - y1;
-        int x = x1;
-        int y = y1;
-        g = MainPanel.getGraphics();
-        Graphics2D g2d = (Graphics2D) g.create();
-        g2d.setStroke(new BasicStroke(2));
-        g2d.drawOval(x, y, 1, 1);
-        int D = (Dy << 1) - Dx; // ~ int D = 2*Dy - Dx;
-        while(x <= x2)
-        {
-            x++;
-            if (D < 0)
-            {
-                D = D + (Dy << 1); // ~ D = D + 2*Dy;
-            }
-            else
-            {
-                D = D + ((Dy - Dx) << 1); // D = D + 2*(Dy - Dx);
-                y++;
-            }
-            g2d.drawOval(x, y, 1, 1);
-        }
-    }
     void DDA_Line(Graphics2D g2d, int x1, int y1, int x2, int y2, int K)
     {
-
         int Dx = x2 - x1;
         int Dy = y2 - y1;
         int x = x1;
         int y = y1;
         float m = Dy/Dx;
-        //g2d.setStroke(new BasicStroke(2));
+
         g2d.drawOval(x, y, 1, 1);
         int temp = 0;
         while(x <= x2)
@@ -143,8 +121,6 @@ public class Bang2D extends JFrame {
     }
 
     public void put8Pixel(Graphics2D g2d, int xc, int yc, int a, int b) {
-
-        //g2d.setStroke(new BasicStroke(2));
         g2d.drawOval(xc + a, yc + b, 1, 1);
         g2d.drawOval(xc - a, yc + b, 1, 1);
         g2d.drawOval(xc - a, yc - b, 1, 1);
@@ -155,10 +131,94 @@ public class Bang2D extends JFrame {
         g2d.drawOval(xc - b, yc - a, 1, 1);
         g2d.drawOval(xc + b, yc - a, 1, 1);
     }
+    //g2d.setColor(new Color(102,51,0));
+    public void Tree(Graphics2D g2d, int x, int height, int width, int R, int k) {
+        //g = MainPanel.getGraphics();
+        //Graphics2D g2d = (Graphics2D) g.create();
+        //HinhCN(g2d,x,y,50,100);
+        if (k == 0) {
+            g2d.setStroke(new BasicStroke(2));
+            g2d.setColor(new Color(102,51,0));
 
+            int y= 197-height;
+            width = Math.round(width/2);
+            for (int i = x-width; i <= x+width;i++) {
+                for (int j = 197; j >= y; j--) g2d.drawOval(i, j, 1, 1);
+            }
+            g2d.setStroke(new BasicStroke(1));
+            g2d.setColor(new Color(51,204,51));
+            //g2d.setColor(Color.black);
+            int locate_y1 = y - Math.round(R/2);
+            int locate_y2 = y + Math.round(R/2);
+            HinhTron(g2d, x-R,locate_y2,R);
+            HinhTron(g2d, x+R,locate_y2,R);
+
+
+            g2d.setStroke(new BasicStroke(2));
+            g2d.setColor(new Color(51,153,0));
+            for (int i = 1; i <= R-2; i++) {
+                HinhTron(g2d, x,locate_y1,i);
+                HinhTron(g2d, x-R,locate_y2,i);
+                HinhTron(g2d, x+R,locate_y2,i);
+            }
+
+            g2d.setStroke(new BasicStroke(1));
+            g2d.setColor(new Color(51,204,51));
+            //g2d.setColor(Color.black);
+            HinhTron(g2d, x,locate_y1,R);
+        }
+        else {
+            g2d.setStroke(new BasicStroke(2));
+            g2d.setColor(new Color(102,51,0));
+
+            int y= 197-height;
+            width = Math.round(width/2);
+            for (int i = x-width; i <= x+width;i++) {
+                for (int j = 197; j >= y; j--) g2d.drawOval(i, j, 1, 1);
+            }
+            g2d.setStroke(new BasicStroke(1));
+            g2d.setColor(new Color(0,102,0));
+            //g2d.setColor(Color.black);
+            int locate_y1 = y - Math.round(R/2);
+            int locate_y2 = y + Math.round(R/2);
+            HinhTron(g2d, x-R,locate_y2,R);
+            HinhTron(g2d, x+R,locate_y2,R);
+
+
+            g2d.setStroke(new BasicStroke(2));
+            g2d.setColor(new Color(0,51,0));
+            for (int i = 1; i <= R-2; i++) {
+                HinhTron(g2d, x,locate_y1,i);
+                HinhTron(g2d, x-R,locate_y2,i);
+                HinhTron(g2d, x+R,locate_y2,i);
+            }
+
+            g2d.setStroke(new BasicStroke(1));
+            g2d.setColor(new Color(0,102,0));
+            //g2d.setColor(Color.black);
+            HinhTron(g2d, x,locate_y1,R);
+        }
+    }
+    public void Side(Graphics2D g2d,int k) {
+
+
+        Tree(g2d,100,70,30,37,k);
+
+        Tree(g2d,300,90,32,30,k);
+
+        Tree(g2d,500,68,35,34,k);
+
+        Tree(g2d,700,85,27,27,k);
+
+        Tree(g2d,900,57,28,25,k);
+
+        Tree(g2d,1100,67,35,30,k);
+
+        Tree(g2d,1300,97,37,34,k);
+
+        Tree(g2d,1500,68,35,34,k);
+    }
     public void CuaSoXe(Graphics2D g2d, int x, int y) {
-        //DuongThang(g, x+40, y+20, x + 80, y + 80);
-        //BresenhamLine(g, x+120, y, x + 170, y + 180);
         x += 10;
         for (int i = x; i < x+100;i++) {
             g2d.drawOval(i, y-10, 1, 1);
@@ -172,20 +232,40 @@ public class Bang2D extends JFrame {
 
         DDA_Line(g2d, x+100, y-10, x + 140, y + 70,0);
     }
-    public void DauXe1(Graphics g, int x, int y) {
+    public void DauXe1(Graphics2D g2d, int x, int y) {
         int x1 = x + 450;
         int y1 = y + 300;
         y = y + 70;
 
-        g = MainPanel.getGraphics();
-        Graphics2D g2d = (Graphics2D) g.create();
         g2d.setStroke(new BasicStroke(2));
         g2d.setColor(new Color(0, 51, 102));
         CuaSoXe(g2d,x1+20,y+30);
         for (int i = x1; i < x1+150;i++) {
             g2d.drawOval(i, y, 1, 1);
         }
-        //DuongThang(g, x1,y, x1 + 150, y);
+        x1 += 150;
+        DDA_Line(g2d, x1, y, x1 + 50, y + 100,0);
+        x1 += 52;
+        y += 103;
+        DuongThang(g2d, x1, y, x1 + 78, y + 48);
+        x1 +=80;
+        y += 50;
+        for (int i= y; i<=y1; i++)
+            g2d.drawOval(x1, i, 1, 1);
+        for (int i= x+450; i<=x1; i++)
+            g2d.drawOval(i, y1, 1, 1);
+    }
+    public void DauXe2(Graphics2D g2d, int x, int y) {
+        int x1 = x + 450;
+        int y1 = y + 300;
+        y = y + 70;
+
+        g2d.setStroke(new BasicStroke(2));
+        g2d.setColor(Color.white);
+        CuaSoXe(g2d,x1+20,y+30);
+        for (int i = x1; i < x1+150;i++) {
+            g2d.drawOval(i, y, 1, 1);
+        }
         x1 += 150;
         DDA_Line(g2d, x1, y, x1 + 50, y + 100,0);
         x1 += 52;
@@ -205,12 +285,20 @@ public class Bang2D extends JFrame {
         g2d.setStroke(new BasicStroke(2));
         g2d.setColor(new Color(0, 204, 102));
         HinhCN(g2d,x,y,450,300);
+
+        DauXe1(g2d,x,y);
+        //Tire
+        g2d.setColor(Color.white);
+        DuongThang(g2d,x+60,y+300,x+180,y+300);
+
+        g2d.setColor(Color.white);
+        DuongThang(g2d,x+502,y+300,x+618,y+300);
+
         g2d.setColor(new Color(0, 0, 51));
         HinhTron(g2d,x+120,y+290,60);
         HinhTron(g2d,x+120,y+290,43);
         HinhTron(g2d,x+560,y+290,60);
         HinhTron(g2d,x+560,y+290,43);
-        DauXe1(g,x,y);
 
         // Bubble
         Random generator = new Random();
@@ -221,18 +309,16 @@ public class Bang2D extends JFrame {
         for (int i = 1; i <= (generator.nextInt(12)+1); i++)
             HinhTron(g2d,x-30,y+260,i);
 
-        //g2d.setColor(new Color(112, 47, 51));
         for (int i = 1; i <= (generator.nextInt(12)+1); i++)
             HinhTron(g2d,x-23,y+247,i);
 
-        //g2d.setColor(new Color(115, 77, 54));
         for (int i = 1; i <= (generator.nextInt(12)+1); i++)
             HinhTron(g2d,x-34,y+278,i);
 
         for (int i = 1; i <= (generator.nextInt(12)+1); i++)
             HinhTron(g2d,x-37,y+240,i);
     }
-    public void Xe2(Graphics g, int x, int y) {
+    public void Xe2(Graphics g, int x, int y, int k) {
         g = MainPanel.getGraphics();
         Graphics2D g2d = (Graphics2D) g.create();
         g2d.setStroke(new BasicStroke(2));
@@ -259,7 +345,6 @@ public class Bang2D extends JFrame {
             g2d.drawOval(x+300, i, 1, 1);
 
         //Window Back
-        //g2d.drawLine(x+145, y+220 ,x+220, y + 140);
         DDA_Line(g2d, x+415, y+140, x+454, y+220,0);
         for (int i = x+320; i <= x + 415; i++)
             g2d.drawOval(i, y+140, 1, 1);
@@ -271,21 +356,40 @@ public class Bang2D extends JFrame {
             g2d.drawOval(x+310, i, 1, 1);
 
         //Tire
-        g2d.setColor(new Color(255, 102, 102));
+        g2d.setColor(Color.black);
+        DuongThang(g2d,x+60,y+300,x+160,y+300);
+        DuongThang(g2d,x+350,y+300,x+450,y+300);
+
+        g2d.setColor(new Color(0, 255, 153));
+
+
         HinhTron(g2d,x+110,y+300,50);
         HinhTron(g2d,x+110,y+300,40);
+
 
         HinhTron(g2d,x+400,y+300,50);
         HinhTron(g2d,x+400,y+300,40);
 
-        //Light
-        //g2d.setColor(new Color(255, 204, 0));
-        //DuongThang(g2d,x-5, y+300,x -570, y+100);
-        //DDA_Line(g2d,x-5, y+300,x -150, y+200,0);
-        //for (int i = y+300; i >= y+200;i--)
-        //for (int j = 0; j <= 10; j++)
-        //	DuongThang(g2d,x-5, i ,x -570, i-j);
-        //HinhCN(g2d,x-57, i,50,j);
+        g2d.setColor(new Color(255, 0, 51));
+        if (k % 2 == 0) {
+            //Font tire
+            for (int i = y+260; i <= y+340; i++)
+                g2d.drawOval(x+110, i, 1, 1);
+            DuongThang(g2d,x+70,y+300,x+149,y+300);
+            //Back Tire
+            for (int i = y+260; i <= y+340; i++)
+                g2d.drawOval(x+400, i, 1, 1);
+            DuongThang(g2d,x+360,y+300,x+440,y+300);
+
+
+        }
+        else {
+            DDA_Line(g2d,x+82,y+272,x+137,y+327,0);
+            DDA_Line(g2d,x+82,y+327,x+137,y+272,0);
+            DDA_Line(g2d,x+372,y+272,x+427,y+327,0);
+            DDA_Line(g2d,x+372,y+327,x+427,y+272,0);
+        }
+
         // Bubble
         Random generator = new Random();
         g2d.setStroke(new BasicStroke(2));
@@ -295,41 +399,11 @@ public class Bang2D extends JFrame {
             g2d.setColor(new Color(generator.nextInt(255),generator.nextInt(255),generator.nextInt(255)));
             HinhTron(g2d,x + 540 + generator.nextInt(120), y+260 - generator.nextInt(150),generator.nextInt(20)+1);
         }
-//        //g2d.setColor(new Color(112, 47, 51));
-//
-//        HinhTron(g2d,x + 530 + generator.nextInt(12),y+247 + generator.nextInt(12),i);
-//
-//        //g2d.setColor(new Color(115, 77, 54));
-//
-//        HinhTron(g2d,x + 530 + generator.nextInt(12),y+278 + generator.nextInt(12),i);
-//
-//        HinhTron(g2d,x + 530 + generator.nextInt(12),y+240,i);
     }
     public void Sky(Graphics2D g2d, int x, int y, int size) {
-        //g2d.setColor(Color.LIGHT_GRAY);
         g2d.setStroke(new BasicStroke(3));
         for (int i = 1; i <= size; i++)
             HinhTron(g2d, x,y,i);
-        //g2d.setColor(Color.BLUE);
-
-
-    }
-    public void Tree(Graphics g, int x, int y, int height, int width) {
-        g = MainPanel.getGraphics();
-        Graphics2D g2d = (Graphics2D) g.create();
-        //HinhCN(g2d,x,y,50,100);
-        g2d.setColor(Color.LIGHT_GRAY);
-        y += Math.round(width/2) + 6;
-        for (int i = y; i <= y+height; i++) g2d.drawOval(x+10, i, 1, 1);
-        for (int i = y; i <= y+height; i++) g2d.drawOval(x+40, i, 1, 1);
-        for (int i = x+10; i <= x+40; i++) g2d.drawOval(i, y+height, 1, 1);
-        g2d.setColor(Color.GREEN);
-        for (int i = 1; i <= width; i++) {
-            HinhTron(g2d, x+25,y-20,i);
-            HinhTron(g2d, x+50,y,i);
-            HinhTron(g2d, x,y,i);
-        }
-
     }
     public static final int x= 100;
     public static final int y = 100;
@@ -337,7 +411,7 @@ public class Bang2D extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(10, 10, 1500, 800);
         MainPanel = new JPanel();
-        MainPanel.setBackground(new Color(255, 204, 0));
+        MainPanel.setBackground(new Color(204, 255, 102));
         MainPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(MainPanel);
         MainPanel.setSize(1500, 800);
@@ -358,28 +432,35 @@ public class Bang2D extends JFrame {
                 Graphics g = SkyPanel.getGraphics();
                 Graphics2D g2d = (Graphics2D) g.create();
 
+                Graphics g2 = SideWalkPanel.getGraphics();
+                Graphics2D g2d2 = (Graphics2D) g2.create();
                 int x1 = -700;
                 int y1 = 357;
 
                 g2d.setColor(Color.ORANGE);
                 Sky(g2d,750,100,100);
-                //Graphics g3 = MainPanel.getGraphics();
+                Side(g2d2,0);
+                //Tree(g2d2,550,50,20,20,0);
+
                 Graphics g1 = XePanel.getGraphics();
-                Graphics g2 = SideWalkPanel.getGraphics();
-                //Graphics2D g2dSW = (Graphics2D) g2.create();
-                //Graphics2D g12d = (Graphics2D) g.create();
+                Graphics2D g2d1 = (Graphics2D) g1.create();
+
+
+
+                Graphics g3 = MainPanel.getGraphics();
+                Graphics2D g2d3 = (Graphics2D) g3.create();
+                int count = 0;
+                int sizeb1, sizeb2, sizeb3, sizeb4;
+                Random generator = new Random();
+
+                //Xe1(g2d3,550,357,sizeb1,sizeb2,sizeb3,sizeb4,1);
+                //Xe1(g2d3,550,357,sizeb1,sizeb2,sizeb3,sizeb4,2);
                 while(x1 <= XePanel.getWidth()+67) {
 
                     try {
-
                         XePanel.update(g1);
-                        SideWalkPanel.update(g2);
-
                         Xe1(g1,x1,y1);
-                        //Xe1(g1,400,357);
-                        //Tree(g2,750,255,62,25);
                         x1 += 50;
-
                         Thread.sleep(450);
                     } catch (InterruptedException e1) {
                         // TODO Auto-generated catch block
@@ -387,15 +468,12 @@ public class Bang2D extends JFrame {
                     }
                 }
                 int y_sun = 100;
-                //Xe2(g1,400,357);
                 int size = 100;
                 int x_moon = SkyPanel.getWidth() - 50;
                 int size_moon = 50;
                 for (int i = 0; i <= 6; i++) {
                     try {
-                        //if (count == 2) size /= 2;
                         SkyPanel.update(g);
-
                         if (i <= 2) {
                             Sky(g2d,750,y_sun,size+10);
                             y_sun += 50;
@@ -408,7 +486,6 @@ public class Bang2D extends JFrame {
                             x_moon -= 200;
                             size_moon += 5;
                             g2d.setColor(Color.ORANGE);
-
                         }
                         else if (i == 5) {
                             SkyPanel.setBackground(Color.DARK_GRAY);
@@ -419,7 +496,8 @@ public class Bang2D extends JFrame {
                             SkyPanel.update(g);
                             XePanel.update(g1);
                             SideWalkPanel.update(g2);
-
+                            //Tree(g2d2,550,50,20,20,1);
+                            Side(g2d2,1);
                             g2d.setColor(Color.LIGHT_GRAY);
                             Sky(g2d,x_moon,80,60);
 
@@ -430,32 +508,27 @@ public class Bang2D extends JFrame {
                         e1.printStackTrace();
                     }
                 }
-                //Sky(g2d,750,100,100);
+
                 int x2 = 1500;
                 int y2 = 357;
                 g2d.setColor(Color.LIGHT_GRAY);
                 SkyPanel.setBackground(Color.BLACK);
-                SideWalkPanel.setBackground(new Color(0, 51, 102));
+                //SideWalkPanel.setBackground(new Color(0, 51, 102));
                 XePanel.setBackground(Color.BLACK);
-                Random generator = new Random();
+
                 SkyPanel.update(g);
                 XePanel.update(g1);
-                SideWalkPanel.update(g2);
+                //SideWalkPanel.update(g2);
+                //Tree(g2d2,550,50,20,20,1);
                 Sky(g2d,750,80,60);
 
-//				g2d.setColor(Color.WHITE);
-//				g2d.setStroke(new BasicStroke(2));
-//			    for (int i = 0; i < 54; i++) {
-//			    	HinhTron(g2d, 10 + generator.nextInt(1494)+1,generator.nextInt(160)+1, generator.nextInt(2)+1);
-//			    	//System.out.println(i);
-//			    }
                 while (x2 >= -660) {
                     try {
-                        Xe2(g1,x2,y2);
+                        count++;
+                        Xe2(g1,x2,y2,count);
                         x2 -= 50;
                         Thread.sleep(450);
                         XePanel.update(g1);
-                        SideWalkPanel.update(g2);
                     } catch (InterruptedException e1) {
                         // TODO Auto-generated catch block
                         e1.printStackTrace();
@@ -464,7 +537,7 @@ public class Bang2D extends JFrame {
 
             }
         });
-        Run_Button.setBounds(718, 500, 170, 45);
+        Run_Button.setBounds(718, 715, 170, 45);
         MainPanel.add(Run_Button);
 
 
@@ -478,4 +551,3 @@ public class Bang2D extends JFrame {
 
     }
 }
-

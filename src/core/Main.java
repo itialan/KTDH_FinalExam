@@ -17,7 +17,7 @@ public class Main extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    frame.setSize(1200, 650);
+                    frame.setSize(400, 300);
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     frame.setResizable(false);
 
@@ -32,28 +32,28 @@ public class Main extends JFrame {
     }
 
     public Main() {
-//        JFrame frame = new JFrame("Ve Hinh Can Ban");
-//
-//        frame.setSize(1200, 650);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setResizable(false);
-//
-//        frame.setLocationRelativeTo(null);
-//        frame.setLayout(null);
-//
-//        TrucToaDo3D toaDo3D = new TrucToaDo3D();
-//        frame.add(toaDo3D.createPanel3D());
-//        frame.setVisible(true);
-
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JButton Button_nhap = new JButton("3D");
-        Button_nhap.addActionListener(new ActionListener() {
+        JButton btn2D = new JButton("2D");
+        btn2D.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
+//                frame.setVisible(false);
+                Bang2D program2D = new Bang2D();
+                program2D.setVisible(true);
+            }
+        });
+        btn2D.setForeground(new Color(135, 120, 235));
+        btn2D.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        btn2D.setBounds(160, 80, 96, 21);
+        contentPane.add(btn2D);
+
+        JButton btn3D = new JButton("3D");
+        btn3D.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+//                frame.setVisible(false);
                 TrucToaDo3D trucToaDo3D = new TrucToaDo3D();
                 trucToaDo3D.setSize(1370, 750);
                 trucToaDo3D.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,10 +62,10 @@ public class Main extends JFrame {
                 trucToaDo3D.setVisible(true);
             }
         });
-        Button_nhap.setForeground(new Color(135, 120, 235));
-        Button_nhap.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        Button_nhap.setBounds(160, 120, 96, 21);
-        contentPane.add(Button_nhap);
+        btn3D.setForeground(new Color(135, 120, 235));
+        btn3D.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        btn3D.setBounds(160, 120, 96, 21);
+        contentPane.add(btn3D);
 
     }
 }

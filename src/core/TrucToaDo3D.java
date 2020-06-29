@@ -63,7 +63,17 @@ public class TrucToaDo3D extends JFrame {
         panel3D.add(cube);
 
         JPanel panelBackground3D = createPanelBackground3D();
+
+        // Add lable "show points coordinate"
+        JLabel pointLable = new JLabel("Points");
+        JLabel coordinateLable = new JLabel("Coordinate");
+
+        pointLable.setBounds(Contants.backgroundWidth + 55, 50, 100, 30);
+        coordinateLable.setBounds(Contants.backgroundWidth + 50 + 100, 50, 100, 30);
+
         panel3D.add(panelBackground3D);
+        panel3D.add(pointLable);
+        panel3D.add(coordinateLable);
 
         return panel3D;
     }
@@ -101,43 +111,43 @@ public class TrucToaDo3D extends JFrame {
         background3D.setLayout(null);
         JLabel labelX, labelY, labelZ, labelO, labelMaxX, labelMinX, labelMaxY, labelMinY, labelMaxZ, labelMinZ;
 
-        labelY=new JLabel("Y");
+        labelY = new JLabel("Y");
         labelY.setBounds(core.Contants.backgroundWidth/2 - 70, 10,10 , 10);
         background3D.add(labelY);
 
-        labelMaxY=new JLabel("325");
+        labelMaxY = new JLabel("325");
         labelMaxY.setBounds(core.Contants.backgroundWidth/2 - 40, 10,30 , 10);
         background3D.add(labelMaxY);
 
-        labelMinY=new JLabel("-325");
+        labelMinY = new JLabel("-325");
         labelMinY.setBounds(core.Contants.backgroundWidth/2 - 40, core.Contants.backgroundHeight-15, 30, 10);
         background3D.add(labelMinY);
 
-        labelX=new JLabel("X");
+        labelX = new JLabel("X");
         labelX.setBounds(core.Contants.backgroundWidth - 15, core.Contants.backgroundHeight/2-15,10 , 10);
         background3D.add(labelX);
 
-        labelMaxX=new JLabel("500");
+        labelMaxX = new JLabel("500");
         labelMaxX.setBounds(core.Contants.backgroundWidth-30, core.Contants.backgroundHeight/2+15,30 , 10);
         background3D.add(labelMaxX);
 
-        labelMinX=new JLabel("-500");
+        labelMinX = new JLabel("-500");
         labelMinX.setBounds(15, core.Contants.backgroundHeight / 2+15, 30, 10);
         background3D.add(labelMinX);
 
-        labelZ=new JLabel("Z");
+        labelZ = new JLabel("Z");
         labelZ.setBounds(160, core.Contants.backgroundHeight - 15,10 , 10);
         background3D.add(labelZ);
 
-        labelMaxZ=new JLabel("460");
+        labelMaxZ = new JLabel("460");
         labelMaxZ.setBounds(195, core.Contants.backgroundHeight - 15,30 , 10);
         background3D.add(labelMaxZ);
 
-        labelMinZ=new JLabel("-460");
+        labelMinZ = new JLabel("-460");
         labelMinZ.setBounds(core.Contants.backgroundWidth/2 + 290, 10, 30, 10);
         background3D.add(labelMinZ);
 
-        labelO=new JLabel("0");
+        labelO = new JLabel("0");
         labelO.setBounds(core.Contants.backgroundWidth/2 - 35, core.Contants.backgroundHeight/2+10,10 , 10);
         background3D.add(labelO);
 
@@ -154,6 +164,8 @@ public class TrucToaDo3D extends JFrame {
             @Override
             public void mouseClicked(MouseEvent arg0) {
                 // TODO Auto-generated method stub
+                Graphics g = panel3D.getGraphics();
+
                 switch(choose) {
                     case Sphere:
                         Sphere s = new Sphere();
@@ -220,6 +232,7 @@ public class TrucToaDo3D extends JFrame {
                                 c.clear();
                                 background3D.revalidate();
                                 background3D.repaint();
+                                g.clearRect(Contants.backgroundWidth + 50, 80, 230, 500);
                             }
                         });
                         break;
@@ -251,9 +264,17 @@ public class TrucToaDo3D extends JFrame {
             }
 
         });
-
-
         return background3D;
     }
+
+//    public JTable createPointsTable() {
+//        String[][] points = {{"A", "2",}, {"B", "3"}};
+//        String collumn[] = {"Point", "Coordinate"};
+//
+//        JTable pointTable3D = new JTable(points, collumn);
+//        pointTable3D.setBounds(1140, 90, 200, 500);
+//
+//        return pointTable3D;
+//    }
 }
 

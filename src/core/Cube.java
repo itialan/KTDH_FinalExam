@@ -135,7 +135,7 @@ public class Cube {
 
         int a = (int) (getWidth() * Math.sqrt(2.0)/2);
         int b = (int) (getZ() * Math.sqrt(2.0)/2);
-        int x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4, x5, y5, z5, x6, y6, z6, x7, y7, z7,  x8, y8, z8;
+        int x1, z1, x2, z2, x3, z3, x4, z4, x5, z5, x6, z6, x7, z7,  x8, z8;
 
         x1 = -b + Contants.X_DEVIATION;
         z1 = b + Contants.Y_DEVIATION + Contants.PANEL_DEVIATION;
@@ -190,6 +190,68 @@ public class Cube {
         g.drawString("F", x3 + 5, z3 - 4);
         g.drawString("G", x7 - 13, z7 - 4);
         g.drawString("H", x8 - 13, z8 - 4);
+
+        String[][] pointsArray = calcCoordinate();
+        String[] points = {"A", "B", "C", "D", "E", "F", "G", "H"};
+
+        // remove old point
+        g.clearRect(Contants.backgroundWidth + 135, 80, 100, 500);
+        for (int i = 0; i <= 7; i++) {
+            g.drawString(points[i], Contants.backgroundWidth + 65, 90 + i * 30);
+            g.drawString("( ", Contants.backgroundWidth + 138, 90 + i * 30);
+            for (int j = 0; j <= 2; j++) {
+                if (j == 2) {
+                    g.drawString(pointsArray[i][j] + ")", Contants.backgroundWidth + 160 + j*25, 90 + i * 30);
+                } else {
+                    g.drawString(pointsArray[i][j] + ", ", Contants.backgroundWidth + 145 + j*35, 90 + i * 30);
+                }
+            }
+        }
+    }
+
+    public String[][] calcCoordinate() {
+        String[][] pointsArray = new String[8][3];
+        int x = getX() / 5;
+        int y = getY() / 5;
+        int z = getZ() / 5;
+        int length = getLength() / 5;
+        int width = getWidth() / 5;
+        int height = getHeight() / 5;
+
+        // A
+        pointsArray[0][0] = Integer.toString(x);
+        pointsArray[0][1] = Integer.toString(y);
+        pointsArray[0][2] = Integer.toString(z);
+
+        pointsArray[1][0] = Integer.toString(x + length);
+        pointsArray[1][1] = Integer.toString(y);
+        pointsArray[1][2] = Integer.toString(z);
+
+        pointsArray[2][0] = Integer.toString(x + length);
+        pointsArray[2][1] = Integer.toString(y);
+        pointsArray[2][2] = Integer.toString(z + width);
+
+        pointsArray[3][0] = Integer.toString(x);
+        pointsArray[3][1] = Integer.toString(y);
+        pointsArray[3][2] = Integer.toString(z + width);
+
+        pointsArray[4][0] = Integer.toString(x);
+        pointsArray[4][1] = Integer.toString(y + height);
+        pointsArray[4][2] = Integer.toString(z);
+
+        pointsArray[5][0] = Integer.toString(x + length);
+        pointsArray[5][1] = Integer.toString(y + height);
+        pointsArray[5][2] = Integer.toString(z);
+
+        pointsArray[6][0] = Integer.toString(x + length);
+        pointsArray[6][1] = Integer.toString(y + height);
+        pointsArray[6][2] = Integer.toString(z + width);
+
+        pointsArray[7][0] = Integer.toString(x);
+        pointsArray[7][1] = Integer.toString(y + height);
+        pointsArray[7][2] = Integer.toString(z + width);
+
+        return pointsArray;
     }
 
     public void midPointLine(Graphics2D g, int x1, int y1, int x2, int y2, boolean dashed) {
