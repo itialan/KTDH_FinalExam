@@ -1,6 +1,7 @@
 package core;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class Cube {
@@ -131,7 +132,6 @@ public class Cube {
     public void draw(JPanel panel) {
         Graphics g = panel.getGraphics();
         Graphics2D g2D = (Graphics2D) g.create();
-        g2D.drawOval(120, 50, 1,  1);
 
         int a = (int) (getWidth() * Math.sqrt(2.0)/2);
         int b = (int) (getZ() * Math.sqrt(2.0)/2);
@@ -178,6 +178,18 @@ public class Cube {
         midPointLine(g2D, x7, z7, x6, z6, false);
         midPointLine(g2D, x6, z6, x5, z5, false);
         midPointLine(g2D, x5, z5, x8, z8, false);
+
+        Font font = new Font("Verdana", Font.BOLD, 12);
+        g.setFont(font);
+
+        g.drawString("A", x1 + 5, z1 - 4);
+        g.drawString("B", x2 + 5, z2 - 4);
+        g.drawString("C", x6 - 13, z6 - 3);
+        g.drawString("D", x5 - 13, z5 - 4);
+        g.drawString("E", x4 + 5, z4 - 4);
+        g.drawString("F", x3 + 5, z3 - 4);
+        g.drawString("G", x7 - 13, z7 - 4);
+        g.drawString("H", x8 - 13, z8 - 4);
     }
 
     public void midPointLine(Graphics2D g, int x1, int y1, int x2, int y2, boolean dashed) {

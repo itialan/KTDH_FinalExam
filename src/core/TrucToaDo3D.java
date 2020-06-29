@@ -2,6 +2,7 @@ package core;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -98,7 +99,7 @@ public class TrucToaDo3D extends JFrame {
             }
         };
         background3D.setLayout(null);
-        JLabel labelX,labelY,labelZ,labelO,labelMaxX,labelMinX,labelMaxY,labelMinY,labelMaxZ,labelMinZ;
+        JLabel labelX, labelY, labelZ, labelO, labelMaxX, labelMinX, labelMaxY, labelMinY, labelMaxZ, labelMinZ;
 
         labelY=new JLabel("Y");
         labelY.setBounds(core.Contants.backgroundWidth/2 - 70, 10,10 , 10);
@@ -143,7 +144,7 @@ public class TrucToaDo3D extends JFrame {
 
         background3D.setPreferredSize(new Dimension( 750, 600 ));
         Border blueBoder;
-        blueBoder=BorderFactory.createLineBorder(Color.BLUE);
+        blueBoder = BorderFactory.createLineBorder(Color.BLUE);
         background3D.setBorder(blueBoder);
         background3D.setBackground(Color.WHITE);
         background3D.setBounds(10, 50, core.Contants.backgroundWidth, core.Contants.backgroundHeight);
@@ -153,7 +154,7 @@ public class TrucToaDo3D extends JFrame {
             @Override
             public void mouseClicked(MouseEvent arg0) {
                 // TODO Auto-generated method stub
-                switch(choose){
+                switch(choose) {
                     case Sphere:
                         Sphere s = new Sphere();
                         s.createToaDo3D();
@@ -163,7 +164,6 @@ public class TrucToaDo3D extends JFrame {
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 // TODO Auto-generated method stub
-
 
                                 Contants.btnDraw.setBackground(Color.GRAY);
                                 Contants.btnClear.setBackground(Color.WHITE);
