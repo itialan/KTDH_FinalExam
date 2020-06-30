@@ -43,6 +43,7 @@ public class Main extends JFrame {
 //                frame.setVisible(false);
                 Bang2D program2D = new Bang2D();
                 program2D.setVisible(true);
+                program2D.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
             }
         });
         btn2D.setForeground(new Color(135, 120, 235));
@@ -56,7 +57,7 @@ public class Main extends JFrame {
 //                frame.setVisible(false);
                 TrucToaDo3D trucToaDo3D = new TrucToaDo3D();
                 trucToaDo3D.setSize(1370, 750);
-                trucToaDo3D.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//                trucToaDo3D.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 trucToaDo3D.setResizable(false);
                 trucToaDo3D.add(trucToaDo3D.createPanel3D());
                 trucToaDo3D.setVisible(true);

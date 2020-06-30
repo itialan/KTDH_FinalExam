@@ -198,6 +198,7 @@ public class TrucToaDo3D extends JFrame {
                                 s.clear();
                                 background3D.revalidate();
                                 background3D.repaint();
+                                g.clearRect(Contants.backgroundWidth + 50, 80, 230, 500);
                             }
                         });
                         break;

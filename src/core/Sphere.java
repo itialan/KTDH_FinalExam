@@ -138,6 +138,14 @@ public class Sphere extends JPanel {
         eclip.setEclipB(temp);
         eclip.drawDashedEclip2(g2D);
         eclip.drawSolidEclip2(g2D);
+
+        Font font = new Font("Verdana", Font.BOLD, 14);
+        g.setFont(font);
+        g.clearRect(Contants.backgroundWidth + 135, 80, 100, 100);
+
+        g.drawString(".I", x1, z1);
+        g.drawString("I", Contants.backgroundWidth + 65, 90);
+        g.drawString("( " + point.getX()/5 + ", " + point.getY()/5 + ", " + point.getZ()/5 + " )", Contants.backgroundWidth + 135, 90);
     }
 
     public void processTextField(){
@@ -164,7 +172,7 @@ public class Sphere extends JPanel {
                     if (text.equals("")){
                         Contants.tfRadius.requestFocus();
                     } else {
-                        setR(Integer.parseInt(text) * 5);
+                        setR(Math.abs(Integer.parseInt(text)) * 5);
                     }
                 }
             }
