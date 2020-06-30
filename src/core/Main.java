@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 
 public class Main extends JFrame {
     private JPanel contentPane;
-    private JTextField textField_R;
     static Main frame = new Main();
 
     public static void main(String[] args) {
@@ -31,7 +30,7 @@ public class Main extends JFrame {
         });
     }
 
-    public Main() {
+    public Main(){
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
